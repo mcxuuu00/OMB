@@ -8,6 +8,7 @@ const PHONE = '+31 647096911';
 const TEL = 'tel:+31647096911';
 const WA = 'https://wa.me/31647096911';
 const MAIL = 'info@cxclusives.nl';
+const MAPS = 'https://maps.app.goo.gl/2bWgGJmu7TwATLE78';
 const URL = { home: '/', aanbod: '/aanbod/', lease: '/lease/', contact: '/contact/' };
 
 const css = `
@@ -168,6 +169,8 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc .cxc-info a:hover{color:var(--cxc-red)}
 .cxc .cxc-contact .cxc-btn{margin-top:28px}
 .cxc .cxc-map{margin-top:28px;height:401px;border:1px solid var(--cxc-ink);border-radius:4px;overflow:hidden;background:var(--cxc-gf)}
+.cxc .cxc-map__link{display:inline-block;margin-top:12px;font-size:12.5px;line-height:21.2px;letter-spacing:1.25px;text-transform:uppercase;color:var(--cxc-red)}
+.cxc .cxc-map__link:hover{color:var(--cxc-ink)}
 .cxc .cxc-map iframe{display:block;width:100%;height:100%;border:0}
 .cxc .cxc-contact__h2--form{font-size:22.4px;line-height:24.2px;letter-spacing:.22px;margin-top:14px}
 .cxc .cxc-form{margin-top:20px}
@@ -454,13 +457,16 @@ ${gap(84)}
 <p class="cxc-eyebrow cxc-eyebrow--anton">Gegevens</p>
 <h2 class="cxc-h2">Kom langs of app ons</h2>
 <ul class="cxc-info">
-<li><span class="cxc-info__icon" aria-hidden="true">📍</span><span><span class="cxc-info__label">Adres</span>Europalaan Oost 28, 6075 ED Herkenbosch</span></li>
+<li><span class="cxc-info__icon" aria-hidden="true">📍</span><span><span class="cxc-info__label">Adres</span><a href="${MAPS}" target="_blank" rel="noopener">Europalaan Oost 28, 6075 ED Herkenbosch</a></span></li>
 <li><span class="cxc-info__icon" aria-hidden="true">☎</span><span><span class="cxc-info__label">Telefoon (alleen WhatsApp)</span><a href="${WA}" target="_blank" rel="noopener">${PHONE}</a></span></li>
 <li><span class="cxc-info__icon" aria-hidden="true">✉</span><span><span class="cxc-info__label">E-mail</span><a href="mailto:${MAIL}">${MAIL}</a></span></li>
 <li><span class="cxc-info__icon" aria-hidden="true">🕑</span><span><span class="cxc-info__label">Openingstijden</span>Maandag tot zondag op afspraak</span></li>
 </ul>
 <a class="cxc-btn" href="${WA}" target="_blank" rel="noopener">App ons direct</a>
+<!-- KAART: wil je precies de Google-vermelding tonen? Open ${MAPS} → Delen → Kaart insluiten → Kopieer HTML,
+     en vervang hieronder alleen de src="..." door de src uit die code. -->
 <div class="cxc-map"><iframe src="https://www.google.com/maps?q=CXclusives%2C%20Europalaan%20Oost%2028%2C%206075%20ED%20Herkenbosch&amp;z=16&amp;output=embed" title="Kaart: CXclusives, Europalaan Oost 28, Herkenbosch" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<a class="cxc-map__link" href="${MAPS}" target="_blank" rel="noopener">Bekijk CXclusives op Google Maps →</a>
 </div>
 <div>
 <p class="cxc-eyebrow cxc-eyebrow--anton">Stuur een bericht</p>
