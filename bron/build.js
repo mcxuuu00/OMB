@@ -14,6 +14,8 @@ const css = `
 .cxc{--cxc-red:#e2231a;--cxc-ink:#141414;--cxc-ink2:#1e1e1e;--cxc-g4:#4a4a4a;--cxc-g6:#6e6e6e;--cxc-ga:#a6a6a6;--cxc-gd:#d9d9d9;--cxc-ge:#ececec;--cxc-gf:#f6f6f6;
   --cxc-anton:'Anton',Impact,'Arial Narrow',sans-serif;--cxc-audio:'Audiowide','Anton',sans-serif;--cxc-inter:'Inter',Arial,sans-serif;--cxc-crimson:'Crimson Text',Georgia,serif;--cxc-serif:'Source Serif 4','Source Serif Pro',Georgia,serif;
   font-family:var(--cxc-anton);font-weight:400;color:var(--cxc-ink2);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html:has(.cxc),body:has(.cxc){overflow-x:clip}
+.cxc.cxc{display:block;position:relative;left:auto;right:auto;width:100vw!important;max-width:100vw!important;margin:0 calc(50% - 50vw)!important;padding:0!important;float:none}
 .cxc *,.cxc *::before,.cxc *::after{box-sizing:border-box}
 .cxc h1,.cxc h2,.cxc h3,.cxc h4,.cxc p,.cxc ul,.cxc li,.cxc figure,.cxc form{margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
 .cxc ul{list-style:none}
@@ -331,7 +333,7 @@ ${fonts}
 <style>
 ${css}
 </style>
-<div class="cxc cxc-page-${slug}">
+<div class="cxc alignfull cxc-page-${slug}">
 ${header(active)}
 <main>
 ${body}
