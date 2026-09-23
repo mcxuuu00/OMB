@@ -28,7 +28,7 @@ Alle CSS begint met `.cxc`, zodat het niet botst met je thema. De lettertypes
 Zoek in de bestanden op deze plaatshouders:
 
 - `#INSTAGRAM-URL`, `#FACEBOOK-URL`, `#GOOGLE-REVIEWS-URL`: de echte links.
-- `JOUW-WEB3FORMS-ACCESS-KEY` (contact.html): maak gratis een key aan op web3forms.com.
+- Contactformulier: gekoppeld aan Web3Forms. Berichten gaan naar het e-mailadres van die access key (instellen op web3forms.com).
   Gebruik je liever Contact Form 7 of WPForms? Vervang dan het `<form>` door de shortcode.
 - Foto's: vervang de grijze vakken (`cxc-photo`) door `<img src="..." alt="...">`.
 - Autokaarten: het zijn nu voorbeeldauto's. Vervang ze door de Mobilox-widget/shortcode,

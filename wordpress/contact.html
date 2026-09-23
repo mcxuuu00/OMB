@@ -174,6 +174,11 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc .cxc-form textarea{height:120px;resize:vertical}
 .cxc .cxc-form input:focus,.cxc .cxc-form textarea:focus{border-color:var(--cxc-ink)}
 .cxc .cxc-form .cxc-btn{margin-top:29px;min-height:49px;padding:13px 30px;line-height:1}
+.cxc .cxc-form .cxc-btn:disabled{opacity:.6;cursor:wait}
+.cxc .cxc-form__status{margin-top:16px;font-family:var(--cxc-inter);font-size:14px;line-height:1.5}
+.cxc .cxc-form__status:empty{display:none}
+.cxc .cxc-form__status.is-ok{color:#1a7f37}
+.cxc .cxc-form__status.is-error{color:var(--cxc-red)}
 .cxc .cxc-hp{position:absolute!important;left:-9999px!important}
 /* footer */
 .cxc .cxc-footer{background:var(--cxc-ink);color:var(--cxc-gd);text-align:center;padding-top:124px}
@@ -271,27 +276,44 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 <li><span class="cxc-info__icon" aria-hidden="true">🕑</span><span><span class="cxc-info__label">Openingstijden</span>Maandag tot zondag op afspraak</span></li>
 </ul>
 <a class="cxc-btn" href="https://wa.me/31647096911" target="_blank" rel="noopener">App ons direct</a>
-<div class="cxc-map"><iframe src="https://www.google.com/maps?q=Europalaan%20Oost%2028%2C%206075%20ED%20Herkenbosch&amp;output=embed" title="Kaart: Europalaan Oost 28, Herkenbosch" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<div class="cxc-map"><iframe src="https://www.google.com/maps?q=CXclusives%2C%20Europalaan%20Oost%2028%2C%206075%20ED%20Herkenbosch&amp;z=16&amp;output=embed" title="Kaart: CXclusives, Europalaan Oost 28, Herkenbosch" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 </div>
 <div>
 <p class="cxc-eyebrow cxc-eyebrow--anton">Stuur een bericht</p>
 <h2 class="cxc-h2 cxc-contact__h2--form">Wij reageren zo snel mogelijk</h2>
-<!-- FORMULIER: koppel dit aan een verzendservice. Standaard staat Web3Forms ingesteld:
-     1) maak gratis een access key aan op https://web3forms.com met info@cxclusives.nl
-     2) vervang JOUW-WEB3FORMS-ACCESS-KEY hieronder door die key.
-     (Notitie uit het ontwerp: berichten naar cxclusives@gmail.com en info@cxclusives.nl.)
-     Liever Contact Form 7 / WPForms? Vervang dan het <form> door de shortcode. -->
+<!-- FORMULIER: verstuurd via Web3Forms. Berichten gaan naar het e-mailadres dat bij deze access key hoort
+     (in te stellen op https://web3forms.com). -->
 <form class="cxc-form" action="https://api.web3forms.com/submit" method="POST">
-<input type="hidden" name="access_key" value="JOUW-WEB3FORMS-ACCESS-KEY">
+<input type="hidden" name="access_key" value="1c51af51-0115-4dbc-b071-f93d379a7edb">
 <input type="hidden" name="subject" value="Nieuw bericht via cxclusives.nl">
+<input type="hidden" name="from_name" value="Website CXclusives">
 <input type="checkbox" name="botcheck" class="cxc-hp" tabindex="-1" autocomplete="off">
 <div class="cxc-field"><label for="cxc-voornaam">Voornaam*</label><input id="cxc-voornaam" name="voornaam" type="text" autocomplete="given-name" required></div>
 <div class="cxc-field"><label for="cxc-achternaam">Achternaam*</label><input id="cxc-achternaam" name="achternaam" type="text" autocomplete="family-name" required></div>
 <div class="cxc-field"><label for="cxc-email">Email*</label><input id="cxc-email" name="email" type="email" autocomplete="email" required></div>
 <div class="cxc-field"><label for="cxc-tel">Telefoonnummer</label><input id="cxc-tel" name="telefoon" type="tel" autocomplete="tel"></div>
-<div class="cxc-field"><label for="cxc-bericht">Bericht</label><textarea id="cxc-bericht" name="bericht"></textarea></div>
+<div class="cxc-field"><label for="cxc-bericht">Bericht*</label><textarea id="cxc-bericht" name="bericht" required></textarea></div>
 <button class="cxc-btn" type="submit">Versturen</button>
+<p class="cxc-form__status" role="status" aria-live="polite"></p>
 </form>
+<script>
+(function(){
+  var f=document.querySelector('.cxc-form');if(!f||!window.fetch)return;
+  var st=f.querySelector('.cxc-form__status'),btn=f.querySelector('button[type=submit]');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    btn.disabled=true;btn.textContent='Bezig…';st.className='cxc-form__status';st.textContent='';
+    fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.success){f.reset();st.classList.add('is-ok');st.textContent='Bedankt! Je bericht is verstuurd, we reageren zo snel mogelijk.';}
+        else{throw new Error(d.message);}
+      })
+      .catch(function(){st.classList.add('is-error');st.textContent='Versturen is niet gelukt. Probeer het opnieuw of app ons via +31 647096911.';})
+      .then(function(){btn.disabled=false;btn.textContent='Versturen';});
+  });
+})();
+</script>
 </div>
 </div></div></section>
 <div style="height:111px" aria-hidden="true"></div>
