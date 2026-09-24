@@ -164,11 +164,12 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
   .cxc .cxc-footer{padding-top:72px}
   .cxc .cxc-br{display:none}
 }
-/* mobiel: auto onder de tekst tonen */
+/* mobiel (smaller dan 768px): geen herofoto, alleen de donkere achtergrond met tekst.
+   De foto wordt op mobiel dan ook niet gedownload, dus de pagina laadt sneller. */
 @media (max-width:767px){
-  .cxc .cxc-hero{background-size:200% auto;background-position:95% 100%}
+  .cxc .cxc-hero{background-image:none}
   .cxc .cxc-hero::before{opacity:0}
-  .cxc .cxc-hero .cxc-wrap{min-height:0;align-items:flex-start;padding-top:56px;padding-bottom:82vw}
+  .cxc .cxc-hero .cxc-wrap{min-height:0;align-items:flex-start;padding-top:64px;padding-bottom:64px}
 }
 @media (max-width:640px){
   .cxc .cxc-topbar .cxc-wrap{justify-content:center;text-align:center;flex-wrap:wrap;gap:0 16px;padding-top:6px;padding-bottom:6px}
