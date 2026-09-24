@@ -2,6 +2,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CXclusives Cars</title>
+<!-- ================= HERO-FOTO =================
+     Andere foto in de hero? Upload hem in WordPress (Media > Nieuw bestand),
+     kopieer de bestands-URL en vervang ALLEEN de link hieronder (tussen de aanhalingstekens).
+     Tip: gebruik een liggende foto van minstens 2560 x 1440 pixels, auto rechts in beeld. -->
+<style>.cxc{--cxc-hero-foto:url('https://cxclusives.nl/wp-content/uploads/2026/09/image-1790266223779.jpg')}</style>
+<!-- ============================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Audiowide&amp;family=Crimson+Text:wght@600;700&amp;family=Inter:wght@400&amp;family=Source+Serif+4:opsz,wght@8..60,900&amp;display=swap" rel="stylesheet">
@@ -55,7 +61,7 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc .cxc-lead{font-size:16px;line-height:27.2px;color:var(--cxc-g6)}
 .cxc .cxc-center{text-align:center}
 /* hero (home): Porsche-foto als volledige achtergrond */
-.cxc .cxc-hero{position:relative;overflow:hidden;color:#fff;background-color:#0d0d0d;background-image:url('https://cxclusives.nl/wp-content/uploads/2026/09/image-1790266223779.jpg');background-repeat:no-repeat;background-size:cover;background-position:right center}
+.cxc .cxc-hero{position:relative;overflow:hidden;color:#fff;background-color:#0d0d0d;background-image:var(--cxc-hero-foto);background-repeat:no-repeat;background-size:cover;background-position:right center}
 .cxc .cxc-hero .cxc-wrap{position:relative;z-index:1;max-width:1550px;display:flex;align-items:center;min-height:760px;padding-top:116px;padding-bottom:116px}
 .cxc .cxc-hero__text{max-width:577px}
 .cxc .cxc-hero h1{font-size:73.6px;line-height:79.5px;letter-spacing:.74px;text-transform:uppercase;color:#fff}
