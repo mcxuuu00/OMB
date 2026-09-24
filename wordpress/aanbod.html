@@ -14,11 +14,11 @@
 html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc.cxc{display:block;position:relative;left:auto;right:auto;width:100vw!important;max-width:100vw!important;margin:0 calc(50% - 50vw)!important;padding:0!important;float:none}
 .cxc *,.cxc *::before,.cxc *::after{box-sizing:border-box}
-.cxc :is(h1,h2,h3,h4,p,ul,li,figure,form):where(:not(.cxc-mox *)){margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
-.cxc ul:where(:not(.cxc-mox *)){list-style:none}
-.cxc a:where(:not(.cxc-mox *)){color:inherit;text-decoration:none;box-shadow:none;border:0}
-.cxc a:hover:where(:not(.cxc-mox *)),.cxc a:focus:where(:not(.cxc-mox *)){color:inherit;text-decoration:none}
-.cxc img:where(:not(.cxc-mox *)){max-width:100%;height:auto;display:block}
+.cxc :is(h1,h2,h3,h4,p,ul,li,figure,form):where(:not(.cxc-mox-src *)){margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
+.cxc ul:where(:not(.cxc-mox-src *)){list-style:none}
+.cxc a:where(:not(.cxc-mox-src *)){color:inherit;text-decoration:none;box-shadow:none;border:0}
+.cxc a:hover:where(:not(.cxc-mox-src *)),.cxc a:focus:where(:not(.cxc-mox-src *)){color:inherit;text-decoration:none}
+.cxc img:where(:not(.cxc-mox-src *)){max-width:100%;height:auto;display:block}
 .cxc .cxc-red{color:var(--cxc-red)}
 .cxc .cxc-wrap{width:100%;max-width:1174px;margin:0 auto;padding:0 24px}
 .cxc .cxc-wrap--wide{max-width:1204px}
@@ -135,13 +135,26 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc .cxc-note a:hover{text-decoration:underline}
 .cxc .cxc-note + .cxc-cards{margin-top:40px}
 /* Mobilox voorraad */
-.cxc .cxc-mox{margin-top:40px;min-height:420px;font-family:var(--cxc-inter);font-size:15px;line-height:1.5;color:var(--cxc-ink2);letter-spacing:0;text-transform:none}
-.cxc .cxc-mox iframe{display:block;width:100%!important;max-width:100%;min-height:600px;border:0}
-.cxc .cxc-mox img{max-width:100%;height:auto}
-.cxc .cxc-mox a{color:var(--cxc-red)}
+.cxc .cxc-mox{position:relative}
+.cxc .cxc-mox-src{position:absolute!important;left:-10000px;top:0;width:1126px;height:1px;overflow:hidden;visibility:hidden;font-family:var(--cxc-inter);font-size:15px;line-height:1.5;color:var(--cxc-ink2);letter-spacing:0;text-transform:none}
+.cxc .cxc-mox.is-native .cxc-mox-src{position:static!important;left:auto;width:auto;height:auto;overflow:visible;visibility:visible;margin-top:50px}
+.cxc .cxc-mox.is-native .cxc-mox__cards,.cxc .cxc-mox.is-empty .cxc-mox__cards{display:none}
+.cxc .cxc-mox-src iframe{display:block;width:100%!important;max-width:100%;min-height:600px;border:0}
+.cxc .cxc-mox-src img{max-width:100%;height:auto}
+.cxc .cxc-skel .cxc-card__body span{display:block;height:12px;border-radius:2px;background:var(--cxc-ge);margin-bottom:12px}
+.cxc .cxc-skel .cxc-card__body span:nth-child(1){width:30%}
+.cxc .cxc-skel .cxc-card__body span:nth-child(2){width:55%;height:20px}
+.cxc .cxc-skel .cxc-card__body span:nth-child(3){width:90%}
+.cxc .cxc-skel .cxc-card__body span:nth-child(4){width:70%;margin-bottom:24px}
+.cxc .cxc-skel{animation:cxc-pulse 1.4s ease-in-out infinite}
+@keyframes cxc-pulse{50%{opacity:.55}}
+.cxc .cxc-mox__back{display:none;margin-top:24px}
+.cxc .cxc-mox.is-native .cxc-mox__back{display:inline-flex}
 .cxc .cxc-mox__fallback{margin-top:24px;text-align:center;font-size:12.5px;line-height:21.2px;letter-spacing:1.25px;text-transform:uppercase;color:var(--cxc-g6)}
 .cxc .cxc-mox__fallback a{color:var(--cxc-red);border-bottom:1px solid var(--cxc-red)}
 .cxc .cxc-mox__fallback a:hover{color:var(--cxc-ink);border-bottom-color:var(--cxc-ink)}
+.cxc .cxc-mox.is-empty .cxc-mox__fallback{font-size:15px}
+.cxc .cxc-mox:not(.is-empty) .cxc-mox__fallback--empty{display:none}
 /* lease plans */
 .cxc .cxc-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .cxc .cxc-plan{border:1px solid var(--cxc-ink);border-radius:4px;padding:43px 37px 41px;background:#fff}
@@ -278,13 +291,138 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 <div style="height:81px" aria-hidden="true"></div>
 <section class="cxc-stock"><div class="cxc-wrap">
 <p class="cxc-note">Deze pagina wordt automatisch gevuld vanuit <b>Mobilox</b>, ons voorraadsysteem — staat een auto er nog niet bij of zoekt u iets specifieks? Stuur ons een <a href="https://wa.me/31647096911" target="_blank" rel="noopener">WhatsApp-bericht</a>, we denken graag mee.</p>
-<!-- MOBILOX VOORRAAD: dit script laadt automatisch alle auto's uit Mobilox.
-     Werkt alleen als je WordPress-account scripts mag plaatsen (Beheerder). -->
+<!-- MOBILOX VOORRAAD: de auto's worden automatisch uit Mobilox geladen en in de CXclusives-stijl getoond.
+     Scripts werken alleen als je in WordPress bent ingelogd als Beheerder. -->
 <div class="cxc-mox">
-<script type="text/javascript" id="mox-voorraad" src="https://sites.mobilox.nl/voorraad.js" data-url="https://occasions.mobilox.nl/3149042-cxclusives-cars"></script>
-<noscript><p class="cxc-mox__fallback"><a href="https://occasions.mobilox.nl/3149042-cxclusives-cars" target="_blank" rel="noopener">Bekijk onze actuele voorraad</a></p></noscript>
-</div>
+<div class="cxc-cards cxc-mox__cards" aria-live="polite"><article class="cxc-card cxc-skel" aria-hidden="true"><div class="cxc-card__media"><svg viewBox="0 0 165 82" aria-hidden="true"><g fill="none" stroke="#1e1e1e" stroke-width="2.46" stroke-linecap="round" stroke-linejoin="round"><path d="M12 57.83C12 46.42 21.95 39.32 34.27 36.5L47.47 23.38C52.97 18.69 60.91 16 69.73 16H100.25C109.79 16 118.53 19.95 125.82 27.48L134.07 36.5C147.09 38.02 156.33 43.6 156.33 56.19V62.75H141.49"/><path d="M26.02 62.75L12 57.83V62.75"/><circle cx="41.24" cy="63.97" r="9.07"/><circle cx="127.85" cy="63.97" r="9.07"/></g></svg></div><div class="cxc-card__body"><span></span><span></span><span></span><span></span></div></article><article class="cxc-card cxc-skel" aria-hidden="true"><div class="cxc-card__media"><svg viewBox="0 0 165 82" aria-hidden="true"><g fill="none" stroke="#1e1e1e" stroke-width="2.46" stroke-linecap="round" stroke-linejoin="round"><path d="M12 57.83C12 46.42 21.95 39.32 34.27 36.5L47.47 23.38C52.97 18.69 60.91 16 69.73 16H100.25C109.79 16 118.53 19.95 125.82 27.48L134.07 36.5C147.09 38.02 156.33 43.6 156.33 56.19V62.75H141.49"/><path d="M26.02 62.75L12 57.83V62.75"/><circle cx="41.24" cy="63.97" r="9.07"/><circle cx="127.85" cy="63.97" r="9.07"/></g></svg></div><div class="cxc-card__body"><span></span><span></span><span></span><span></span></div></article><article class="cxc-card cxc-skel" aria-hidden="true"><div class="cxc-card__media"><svg viewBox="0 0 165 82" aria-hidden="true"><g fill="none" stroke="#1e1e1e" stroke-width="2.46" stroke-linecap="round" stroke-linejoin="round"><path d="M12 57.83C12 46.42 21.95 39.32 34.27 36.5L47.47 23.38C52.97 18.69 60.91 16 69.73 16H100.25C109.79 16 118.53 19.95 125.82 27.48L134.07 36.5C147.09 38.02 156.33 43.6 156.33 56.19V62.75H141.49"/><path d="M26.02 62.75L12 57.83V62.75"/><circle cx="41.24" cy="63.97" r="9.07"/><circle cx="127.85" cy="63.97" r="9.07"/></g></svg></div><div class="cxc-card__body"><span></span><span></span><span></span><span></span></div></article></div>
+<div class="cxc-mox-src"><script type="text/javascript" id="mox-voorraad" src="https://sites.mobilox.nl/voorraad.js" data-url="https://occasions.mobilox.nl/3149042-cxclusives-cars"></script></div>
 <p class="cxc-mox__fallback">Wordt de voorraad niet getoond? <a href="https://occasions.mobilox.nl/3149042-cxclusives-cars" target="_blank" rel="noopener">Open de voorraad in een nieuw venster</a></p>
+<a class="cxc-btn cxc-btn--line cxc-mox__back" href="#">← Terug naar alle auto's</a>
+</div>
+<script>
+/* CXclusives – zet de Mobilox-voorraad om naar CXclusives-autokaarten.
+   Het Mobilox-script (voorraad.js) laadt onzichtbaar in .cxc-mox-src; dit script leest
+   de auto's daaruit en tekent ze als .cxc-card. Lukt dat niet, dan wordt de originele
+   Mobilox-weergave getoond. */
+(function () {
+  var box = document.querySelector('.cxc-mox');
+  if (!box) return;
+  var src = box.querySelector('.cxc-mox-src');
+  var out = box.querySelector('.cxc-mox__cards');
+  var limit = parseInt(box.getAttribute('data-limit') || '0', 10);
+  var firstBadge = box.getAttribute('data-badge') || '';
+  var CAR = out.querySelector('svg') ? out.querySelector('svg').outerHTML : '';
+  var TWO_WORD = /^(land rover|alfa romeo|aston martin|rolls royce|mini cooper|lynk & co)\b/i;
+  var parsedOnce = false, timer = null;
+  // Tekst met spaties tussen elementen (het bronblok is onzichtbaar, dus innerText werkt niet).
+  function txt(el) {
+    var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), parts = [], n;
+    while ((n = w.nextNode())) if (!/^(SCRIPT|STYLE|NOSCRIPT)$/.test(n.parentNode.nodeName)) parts.push(n.nodeValue);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function hasImg(el) { return el.querySelector('img,[style*="background-image"]') || (el.style && /background-image/.test(el.getAttribute('style') || '')); }
+  var DATA = /€|km\b|\b(19[89]\d|20[0-4]\d)\b|prijs|aanvraag/i;
+  // The car list = the element with the most children that each hold a photo and car data.
+  function findItems() {
+    var best = [], nodes = src.querySelectorAll('*');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (/^(SCRIPT|STYLE|SELECT|OPTION|NOSCRIPT|SVG)$/i.test(el.tagName)) continue;
+      var kids = [];
+      for (var j = 0; j < el.children.length; j++) {
+        var c = el.children[j];
+        if (hasImg(c) && DATA.test(txt(c))) kids.push(c);
+      }
+      if (kids.length && kids.length >= best.length) best = kids;
+    }
+    return best;
+  }
+  function imgOf(item) {
+    var img = item.querySelector('img');
+    if (img) {
+      var s = img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || img.getAttribute('data-original') || img.currentSrc || img.getAttribute('src') || '';
+      if (!s && img.getAttribute('srcset')) s = img.getAttribute('srcset').split(',')[0].trim().split(' ')[0];
+      if (s && !/^data:image\/(gif|svg)/.test(s)) return { src: s, alt: img.getAttribute('alt') || '' };
+    }
+    var bg = item.querySelector('[style*="background-image"]') || item;
+    var m = (bg.getAttribute('style') || '').match(/url\(["']?([^"')]+)/);
+    return m ? { src: m[1], alt: '' } : null;
+  }
+  function parse(item) {
+    var t = txt(item);
+    var a = item.tagName === 'A' ? item : item.querySelector('a[href]');
+    var h = item.querySelector('h1,h2,h3,h4,h5,h6,[class*="title"],[class*="titel"],[class*="naam"],[class*="name"],strong,b');
+    var img = imgOf(item);
+    var title = h ? txt(h) : (img && img.alt) || '';
+    var mb = title.match(TWO_WORD);
+    var brand = mb ? mb[0] : title.split(' ')[0];
+    var model = title.slice(brand.length).trim();
+    var price = t.match(/€\s?[\d.]+(?:,(?:\d{2}|-{1,2}))?/);
+    var km = t.match(/\b(\d{1,3}(?:\.\d{3})+|\d+)\s?km\b/i);
+    var year = t.match(/\b(19[89]\d|20[0-4]\d)\b/);
+    var fuel = t.match(/plug-in hybride|hybride|benzine|diesel|elektrisch|lpg|cng|waterstof/i);
+    var gear = t.match(/semi-automaat|automaat|handgeschakeld|handmatig/i);
+    var lab = item.querySelector('[class*="label"],[class*="badge"],[class*="sticker"],[class*="ribbon"],[class*="status"]');
+    var badge = lab && txt(lab).length < 22 ? txt(lab) : '';
+    function cap(m) { return m ? m[0].charAt(0).toUpperCase() + m[0].slice(1).toLowerCase() : ''; }
+    return {
+      a: a, href: a ? a.getAttribute('href') : '', img: img, brand: brand, model: model || brand,
+      specs: [year && year[0], km && km[1] + ' km', cap(gear), cap(fuel)].filter(Boolean).join(' · '),
+      price: price ? price[0].replace(/\s/, ' ') : (/aanvraag/i.test(t) ? 'Prijs op aanvraag' : 'Vraag naar prijs'),
+      badge: badge
+    };
+  }
+  function realUrl(h) { return h && h !== '#' && !/^javascript:/i.test(h) && h.charAt(0) !== '#'; }
+  function native() { box.classList.add('is-native'); }
+  function render() {
+    if (box.classList.contains('is-native')) return;
+    var items = findItems();
+    if (!items.length) return;
+    var cars = items.map(parse).filter(function (c) { return c.brand; });
+    if (!cars.length) return;
+    if (limit) cars = cars.slice(0, limit);
+    parsedOnce = true;
+    out.innerHTML = cars.map(function (c, i) {
+      var badge = c.badge || (i === 0 ? firstBadge : '');
+      var media = c.img ? '<img src="' + esc(c.img.src) + '" alt="' + esc(c.brand + ' ' + c.model) + '" loading="lazy">' : CAR;
+      var href = realUrl(c.href) ? c.href : '#';
+      return '<article class="cxc-card">' +
+        '<div class="cxc-card__media">' + (badge ? '<span class="cxc-badge">' + esc(badge) + '</span>' : '') + media + '</div>' +
+        '<div class="cxc-card__body">' +
+        '<p class="cxc-card__brand">' + esc(c.brand) + '</p>' +
+        '<h3 class="cxc-card__title">' + esc(c.model) + '</h3>' +
+        (c.specs ? '<p class="cxc-card__specs">' + esc(c.specs) + '</p>' : '') +
+        '<div class="cxc-card__price"><strong>' + esc(c.price) + '</strong><span>Lease mogelijk</span></div>' +
+        '<a class="cxc-card__btn" href="' + esc(href) + '" data-i="' + i + '">Bekijk voertuig</a>' +
+        '</div></article>';
+    }).join('');
+    // Mobilox-detailpagina's die via JavaScript openen: toon dan de Mobilox-weergave.
+    out.querySelectorAll('.cxc-card__btn').forEach(function (btn) {
+      var c = cars[+btn.getAttribute('data-i')];
+      if (realUrl(c.href) || !c.a) return;
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); native();
+        c.a.click();
+        box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+  function schedule() { clearTimeout(timer); timer = setTimeout(render, 250); }
+  if (window.MutationObserver) new MutationObserver(schedule).observe(src, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'data-src', 'style', 'href'] });
+  window.addEventListener('load', schedule);
+  // Een gedeelde link naar een auto (#...) direct in de Mobilox-weergave openen.
+  if (location.hash.length > 1 && !limit) native();
+  // Na 12 seconden niets kunnen omzetten? Toon Mobilox zelf, of de reservelink als er niets laadde.
+  setTimeout(function () {
+    if (parsedOnce) return;
+    if (txt(src) || src.querySelector('iframe,img')) native();
+    else box.classList.add('is-empty');
+  }, 12000);
+  var back = box.querySelector('.cxc-mox__back');
+  if (back) back.addEventListener('click', function (e) { e.preventDefault(); location.href = location.pathname; });
+})();
+</script>
 </div></section>
 <div style="height:102px" aria-hidden="true"></div>
 <section class="cxc-cta">

@@ -19,11 +19,11 @@ const css = `
 html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc.cxc{display:block;position:relative;left:auto;right:auto;width:100vw!important;max-width:100vw!important;margin:0 calc(50% - 50vw)!important;padding:0!important;float:none}
 .cxc *,.cxc *::before,.cxc *::after{box-sizing:border-box}
-.cxc :is(h1,h2,h3,h4,p,ul,li,figure,form):where(:not(.cxc-mox *)){margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
-.cxc ul:where(:not(.cxc-mox *)){list-style:none}
-.cxc a:where(:not(.cxc-mox *)){color:inherit;text-decoration:none;box-shadow:none;border:0}
-.cxc a:hover:where(:not(.cxc-mox *)),.cxc a:focus:where(:not(.cxc-mox *)){color:inherit;text-decoration:none}
-.cxc img:where(:not(.cxc-mox *)){max-width:100%;height:auto;display:block}
+.cxc :is(h1,h2,h3,h4,p,ul,li,figure,form):where(:not(.cxc-mox-src *)){margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
+.cxc ul:where(:not(.cxc-mox-src *)){list-style:none}
+.cxc a:where(:not(.cxc-mox-src *)){color:inherit;text-decoration:none;box-shadow:none;border:0}
+.cxc a:hover:where(:not(.cxc-mox-src *)),.cxc a:focus:where(:not(.cxc-mox-src *)){color:inherit;text-decoration:none}
+.cxc img:where(:not(.cxc-mox-src *)){max-width:100%;height:auto;display:block}
 .cxc .cxc-red{color:var(--cxc-red)}
 .cxc .cxc-wrap{width:100%;max-width:1174px;margin:0 auto;padding:0 24px}
 .cxc .cxc-wrap--wide{max-width:1204px}
@@ -140,13 +140,26 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc .cxc-note a:hover{text-decoration:underline}
 .cxc .cxc-note + .cxc-cards{margin-top:40px}
 /* Mobilox voorraad */
-.cxc .cxc-mox{margin-top:40px;min-height:420px;font-family:var(--cxc-inter);font-size:15px;line-height:1.5;color:var(--cxc-ink2);letter-spacing:0;text-transform:none}
-.cxc .cxc-mox iframe{display:block;width:100%!important;max-width:100%;min-height:600px;border:0}
-.cxc .cxc-mox img{max-width:100%;height:auto}
-.cxc .cxc-mox a{color:var(--cxc-red)}
+.cxc .cxc-mox{position:relative}
+.cxc .cxc-mox-src{position:absolute!important;left:-10000px;top:0;width:1126px;height:1px;overflow:hidden;visibility:hidden;font-family:var(--cxc-inter);font-size:15px;line-height:1.5;color:var(--cxc-ink2);letter-spacing:0;text-transform:none}
+.cxc .cxc-mox.is-native .cxc-mox-src{position:static!important;left:auto;width:auto;height:auto;overflow:visible;visibility:visible;margin-top:50px}
+.cxc .cxc-mox.is-native .cxc-mox__cards,.cxc .cxc-mox.is-empty .cxc-mox__cards{display:none}
+.cxc .cxc-mox-src iframe{display:block;width:100%!important;max-width:100%;min-height:600px;border:0}
+.cxc .cxc-mox-src img{max-width:100%;height:auto}
+.cxc .cxc-skel .cxc-card__body span{display:block;height:12px;border-radius:2px;background:var(--cxc-ge);margin-bottom:12px}
+.cxc .cxc-skel .cxc-card__body span:nth-child(1){width:30%}
+.cxc .cxc-skel .cxc-card__body span:nth-child(2){width:55%;height:20px}
+.cxc .cxc-skel .cxc-card__body span:nth-child(3){width:90%}
+.cxc .cxc-skel .cxc-card__body span:nth-child(4){width:70%;margin-bottom:24px}
+.cxc .cxc-skel{animation:cxc-pulse 1.4s ease-in-out infinite}
+@keyframes cxc-pulse{50%{opacity:.55}}
+.cxc .cxc-mox__back{display:none;margin-top:24px}
+.cxc .cxc-mox.is-native .cxc-mox__back{display:inline-flex}
 .cxc .cxc-mox__fallback{margin-top:24px;text-align:center;font-size:12.5px;line-height:21.2px;letter-spacing:1.25px;text-transform:uppercase;color:var(--cxc-g6)}
 .cxc .cxc-mox__fallback a{color:var(--cxc-red);border-bottom:1px solid var(--cxc-red)}
 .cxc .cxc-mox__fallback a:hover{color:var(--cxc-ink);border-bottom-color:var(--cxc-ink)}
+.cxc .cxc-mox.is-empty .cxc-mox__fallback{font-size:15px}
+.cxc .cxc-mox:not(.is-empty) .cxc-mox__fallback--empty{display:none}
 /* lease plans */
 .cxc .cxc-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .cxc .cxc-plan{border:1px solid var(--cxc-ink);border-radius:4px;padding:43px 37px 41px;background:#fff}
@@ -310,6 +323,21 @@ ${CARS.map(([badge, brand, model, specs]) => `<article class="cxc-card">
 </article>`).join('\n')}
 </div>`;
 
+const MOX_JS = fs.readFileSync(path.join(__dirname, 'mobilox.js'), 'utf8').trim();
+const skel = () => `<article class="cxc-card cxc-skel" aria-hidden="true"><div class="cxc-card__media">${car}</div><div class="cxc-card__body"><span></span><span></span><span></span><span></span></div></article>`;
+const mox = ({ limit = 0, badge = '' } = {}) => `
+<!-- MOBILOX VOORRAAD: de auto's worden automatisch uit Mobilox geladen en in de CXclusives-stijl getoond.
+     Scripts werken alleen als je in WordPress bent ingelogd als Beheerder. -->
+<div class="cxc-mox"${limit ? ` data-limit="${limit}"` : ''}${badge ? ` data-badge="${badge}"` : ''}>
+<div class="cxc-cards cxc-mox__cards" aria-live="polite">${skel()}${skel()}${skel()}</div>
+<div class="cxc-mox-src"><script type="text/javascript" id="mox-voorraad" src="https://sites.mobilox.nl/voorraad.js" data-url="${MOBILOX}"></script></div>
+<p class="cxc-mox__fallback${limit ? ' cxc-mox__fallback--empty' : ''}">${limit ? '' : 'Wordt de voorraad niet getoond? '}<a href="${MOBILOX}" target="_blank" rel="noopener">${limit ? 'Bekijk onze actuele voorraad' : 'Open de voorraad in een nieuw venster'}</a></p>
+<a class="cxc-btn cxc-btn--line cxc-mox__back" href="#">← Terug naar alle auto's</a>
+</div>
+<script>
+${MOX_JS}
+</script>`;
+
 const brands = `<div class="cxc-brands"><ul><li>Tesla</li><li>Audi</li><li>BMW</li><li>Mercedes</li><li>Porsche</li></ul></div>`;
 
 const reviews = `
@@ -383,7 +411,7 @@ ${gap(32)}
 <h2 class="cxc-h2">NIEUW binnen gekregen</h2>
 <p class="cxc-lead">Een greep uit onze actuele collectie, word automatisch ververst via ons voorraadsysteem <b>Mobilox</b>.</p>
 </div>
-${cards()}
+${mox({ limit: 3, badge: 'Net binnen' })}
 <div class="cxc-more"><a class="cxc-btn cxc-btn--line" href="${URL.aanbod}">Bekijk de volledige collectie</a></div>
 </div></section>
 ${gap(72)}
@@ -409,13 +437,7 @@ ${brands}
 ${gap(81)}
 <section class="cxc-stock"><div class="cxc-wrap">
 <p class="cxc-note">Deze pagina wordt automatisch gevuld vanuit <b>Mobilox</b>, ons voorraadsysteem — staat een auto er nog niet bij of zoekt u iets specifieks? Stuur ons een <a href="${WA}" target="_blank" rel="noopener">WhatsApp-bericht</a>, we denken graag mee.</p>
-<!-- MOBILOX VOORRAAD: dit script laadt automatisch alle auto's uit Mobilox.
-     Werkt alleen als je WordPress-account scripts mag plaatsen (Beheerder). -->
-<div class="cxc-mox">
-<script type="text/javascript" id="mox-voorraad" src="https://sites.mobilox.nl/voorraad.js" data-url="${MOBILOX}"></script>
-<noscript><p class="cxc-mox__fallback"><a href="${MOBILOX}" target="_blank" rel="noopener">Bekijk onze actuele voorraad</a></p></noscript>
-</div>
-<p class="cxc-mox__fallback">Wordt de voorraad niet getoond? <a href="${MOBILOX}" target="_blank" rel="noopener">Open de voorraad in een nieuw venster</a></p>
+${mox()}
 </div></section>
 ${gap(102)}
 ${cta({ eyebrow: 'jouw droomauto er niet tussen?', title: 'Wij denken <span class="cxc-red">graag</span> mee', text: 'Via ons netwerk vinden wij ook auto\'s die niet in de huidige <br class="cxc-br">voorraad staan.', btn: 'Neem contact op', href: URL.contact })}
@@ -458,7 +480,7 @@ ${gap(83)}
 <h2 class="cxc-h2">Beschikbaar voor lease</h2>
 <p class="cxc-lead">Een selectie uit onze collectie, geschikt voor lease.</p>
 </div>
-${cards()}
+${mox({ limit: 3 })}
 </div></section>
 ${gap(92)}
 ${cta({ eyebrow: 'Vragen over lease?', eyebrowCls: 'cxc-eyebrow--anton', title: 'Wij denken <span class="cxc-red">graag</span> met u mee', text: 'Geen verplichtingen, gewoon een eerlijk advies op maat.', textCls: 'cxc-cta__text--anton', btn: 'Naar de contactpagina', href: URL.contact })}`);
