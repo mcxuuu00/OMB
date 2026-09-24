@@ -31,7 +31,8 @@ Zoek in de bestanden op deze plaatshouders:
 - Contactformulier: gekoppeld aan Web3Forms. Berichten gaan naar het e-mailadres van die access key (instellen op web3forms.com).
   Gebruik je liever Contact Form 7 of WPForms? Vervang dan het `<form>` door de shortcode.
 - Foto's: vervang de grijze vakken (`cxc-photo`) door `<img src="..." alt="...">`.
-- Autokaarten: het zijn nu voorbeeldauto's. Vervang ze door de Mobilox-widget/shortcode,
+- Aanbod: toont de live Mobilox-voorraad (script `voorraad.js`; vereist een Beheerder-account in WordPress).
+- Autokaarten op Home en Lease: het zijn nu voorbeeldauto's. Vervang ze door de Mobilox-widget,
   of vervang per auto de `<svg>` door een `<img>`.
 - `Bekijk voertuig` linkt nu naar `#`.
 

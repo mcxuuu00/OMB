@@ -9,6 +9,7 @@ const TEL = 'tel:+31647096911';
 const WA = 'https://wa.me/31647096911';
 const MAIL = 'info@cxclusives.nl';
 const MAPS = 'https://maps.app.goo.gl/2bWgGJmu7TwATLE78';
+const MOBILOX = 'https://occasions.mobilox.nl/3149042-cxclusives-cars';
 const URL = { home: '/', aanbod: '/aanbod/', lease: '/lease/', contact: '/contact/' };
 
 const css = `
@@ -18,11 +19,11 @@ const css = `
 html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc.cxc{display:block;position:relative;left:auto;right:auto;width:100vw!important;max-width:100vw!important;margin:0 calc(50% - 50vw)!important;padding:0!important;float:none}
 .cxc *,.cxc *::before,.cxc *::after{box-sizing:border-box}
-.cxc h1,.cxc h2,.cxc h3,.cxc h4,.cxc p,.cxc ul,.cxc li,.cxc figure,.cxc form{margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
-.cxc ul{list-style:none}
-.cxc a{color:inherit;text-decoration:none;box-shadow:none;border:0}
-.cxc a:hover,.cxc a:focus{color:inherit;text-decoration:none}
-.cxc img{max-width:100%;height:auto;display:block}
+.cxc :is(h1,h2,h3,h4,p,ul,li,figure,form):where(:not(.cxc-mox *)){margin:0;padding:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;border:0;background:none}
+.cxc ul:where(:not(.cxc-mox *)){list-style:none}
+.cxc a:where(:not(.cxc-mox *)){color:inherit;text-decoration:none;box-shadow:none;border:0}
+.cxc a:hover:where(:not(.cxc-mox *)),.cxc a:focus:where(:not(.cxc-mox *)){color:inherit;text-decoration:none}
+.cxc img:where(:not(.cxc-mox *)){max-width:100%;height:auto;display:block}
 .cxc .cxc-red{color:var(--cxc-red)}
 .cxc .cxc-wrap{width:100%;max-width:1174px;margin:0 auto;padding:0 24px}
 .cxc .cxc-wrap--wide{max-width:1204px}
@@ -138,6 +139,14 @@ html:has(.cxc),body:has(.cxc){overflow-x:clip}
 .cxc .cxc-note a{color:var(--cxc-red)}
 .cxc .cxc-note a:hover{text-decoration:underline}
 .cxc .cxc-note + .cxc-cards{margin-top:40px}
+/* Mobilox voorraad */
+.cxc .cxc-mox{margin-top:40px;min-height:420px;font-family:var(--cxc-inter);font-size:15px;line-height:1.5;color:var(--cxc-ink2);letter-spacing:0;text-transform:none}
+.cxc .cxc-mox iframe{display:block;width:100%!important;max-width:100%;min-height:600px;border:0}
+.cxc .cxc-mox img{max-width:100%;height:auto}
+.cxc .cxc-mox a{color:var(--cxc-red)}
+.cxc .cxc-mox__fallback{margin-top:24px;text-align:center;font-size:12.5px;line-height:21.2px;letter-spacing:1.25px;text-transform:uppercase;color:var(--cxc-g6)}
+.cxc .cxc-mox__fallback a{color:var(--cxc-red);border-bottom:1px solid var(--cxc-red)}
+.cxc .cxc-mox__fallback a:hover{color:var(--cxc-ink);border-bottom-color:var(--cxc-ink)}
 /* lease plans */
 .cxc .cxc-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .cxc .cxc-plan{border:1px solid var(--cxc-ink);border-radius:4px;padding:43px 37px 41px;background:#fff}
@@ -400,7 +409,13 @@ ${brands}
 ${gap(81)}
 <section class="cxc-stock"><div class="cxc-wrap">
 <p class="cxc-note">Deze pagina wordt automatisch gevuld vanuit <b>Mobilox</b>, ons voorraadsysteem — staat een auto er nog niet bij of zoekt u iets specifieks? Stuur ons een <a href="${WA}" target="_blank" rel="noopener">WhatsApp-bericht</a>, we denken graag mee.</p>
-${cards()}
+<!-- MOBILOX VOORRAAD: dit script laadt automatisch alle auto's uit Mobilox.
+     Werkt alleen als je WordPress-account scripts mag plaatsen (Beheerder). -->
+<div class="cxc-mox">
+<script type="text/javascript" id="mox-voorraad" src="https://sites.mobilox.nl/voorraad.js" data-url="${MOBILOX}"></script>
+<noscript><p class="cxc-mox__fallback"><a href="${MOBILOX}" target="_blank" rel="noopener">Bekijk onze actuele voorraad</a></p></noscript>
+</div>
+<p class="cxc-mox__fallback">Wordt de voorraad niet getoond? <a href="${MOBILOX}" target="_blank" rel="noopener">Open de voorraad in een nieuw venster</a></p>
 </div></section>
 ${gap(102)}
 ${cta({ eyebrow: 'jouw droomauto er niet tussen?', title: 'Wij denken <span class="cxc-red">graag</span> mee', text: 'Via ons netwerk vinden wij ook auto\'s die niet in de huidige <br class="cxc-br">voorraad staan.', btn: 'Neem contact op', href: URL.contact })}
